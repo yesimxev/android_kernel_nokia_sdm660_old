@@ -6419,6 +6419,9 @@ void wma_set_sta_wow_bitmask(uint32_t *bitmask, uint32_t wow_bitmap_size)
 	wma_set_wow_event_bitmap(WOW_TDLS_CONN_TRACKER_EVENT,
 			     WMI_WOW_MAX_EVENT_BM_LEN,
 			     bitmask);
+	wma_set_wow_event_bitmap(WOW_ROAM_PMKID_REQUEST_EVENT,
+				 WMI_WOW_MAX_EVENT_BM_LEN,
+				 bitmask);
 	/* Add further STA wakeup events above this line. */
 }
 
@@ -6572,5 +6575,35 @@ QDF_STATUS wma_get_roam_scan_stats(WMA_HANDLE handle,
 	WMA_LOGD("%s: Exit", __func__);
 
 	return QDF_STATUS_SUCCESS;
+}
+
+/**
+ * wma_mgmt_pktcapture_status_map() - map Tx status for MGMT packets
+ * with packet capture Tx status
+ * @status: Tx status
+ *
+ * Return: pktcapture_tx_status enum
+ */
+enum pktcapture_tx_status
+wma_mgmt_pktcapture_status_map(uint8_t status)
+{
+	enum pktcapture_tx_status tx_status;
+
+	switch (status) {
+	case WMI_MGMT_TX_COMP_TYPE_COMPLETE_OK:
+		tx_status = pktcapture_tx_status_ok;
+		break;
+	case WMI_MGMT_TX_COMP_TYPE_DISCARD:
+		tx_status = pktcapture_tx_status_discard;
+		break;
+	case WMI_MGMT_TX_COMP_TYPE_COMPLETE_NO_ACK:
+		tx_status = pktcapture_tx_status_no_ack;
+		break;
+	default:
+		tx_status = pktcapture_tx_status_discard;
+		break;
+	}
+
+	return tx_status;
 }
 
