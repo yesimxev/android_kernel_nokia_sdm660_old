@@ -1589,7 +1589,7 @@ struct hdd_adapter_s {
 	bool offloads_configured;
 
 	/* DSCP to UP QoS Mapping */
-	sme_QosWmmUpType hddWmmDscpToUpMap[WLAN_HDD_MAX_DSCP + 1];
+	sme_QosWmmUpType hddWmmDscpToUpMap[WLAN_MAX_DSCP + 1];
 
 #ifdef WLAN_FEATURE_LINK_LAYER_STATS
 	bool isLinkLayerStatsSet;
@@ -3268,6 +3268,16 @@ hdd_station_info_t *hdd_get_stainfo(hdd_station_info_t *aStaInfo,
 
 int hdd_driver_memdump_init(void);
 void hdd_driver_memdump_deinit(void);
+
+/**
+ * hdd_driver_mem_cleanup() - Frees memory allocated for
+ * driver dump
+ *
+ * This function  frees driver dump memory.
+ *
+ * Return: None
+ */
+void hdd_driver_mem_cleanup(void);
 
 /**
  * wlan_hdd_free_cache_channels() - Free the cache channels list

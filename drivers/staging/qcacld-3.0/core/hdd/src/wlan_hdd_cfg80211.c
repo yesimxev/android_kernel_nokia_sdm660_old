@@ -6689,7 +6689,7 @@ static int __wlan_hdd_cfg80211_wifi_logger_get_ring_data(struct wiphy *wiphy,
 				WLAN_LOG_REASON_CODE_UNUSED,
 				true, false);
 		if (QDF_STATUS_SUCCESS != status) {
-			hdd_err("Failed to trigger bug report");
+			hdd_debug("Failed to trigger bug report");
 			return -EINVAL;
 		}
 	} else {
@@ -18500,6 +18500,8 @@ int wlan_hdd_try_disconnect(hdd_adapter_t *pAdapter)
 			if (!rc) {
 				hdd_err("roaming comp var timed out session Id: %d",
 					pAdapter->sessionId);
+				/* Clear roaming in progress flag */
+				hdd_set_roaming_in_progress(false);
 			}
 			if (pAdapter->roam_ho_fail) {
 				INIT_COMPLETION(pAdapter->disconnect_comp_var);
@@ -18884,6 +18886,8 @@ int wlan_hdd_disconnect(hdd_adapter_t *pAdapter, u16 reason)
 			if (!rc) {
 				hdd_err("roaming comp var timed out session Id: %d",
 					pAdapter->sessionId);
+				/* Clear roaming in progress flag */
+				hdd_set_roaming_in_progress(false);
 			}
 			if (pAdapter->roam_ho_fail) {
 				INIT_COMPLETION(pAdapter->disconnect_comp_var);
