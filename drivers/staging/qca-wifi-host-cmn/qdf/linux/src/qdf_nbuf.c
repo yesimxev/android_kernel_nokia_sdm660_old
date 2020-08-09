@@ -3535,18 +3535,12 @@ unsigned int qdf_nbuf_update_radiotap(struct mon_rx_status *rx_status,
 		rtap_ext = (uint32_t *)&rthdr->it_present;
 		rtap_ext++;
 		*rtap_ext = cpu_to_le32(1 << IEEE80211_RADIOTAP_TX_STATUS);
-<<<<<<< HEAD
-
-		rtap_buf[rtap_len] = rx_status->tx_status;
-		rtap_len += 1;
-=======
 		*rtap_ext |= cpu_to_le32(1 << IEEE80211_RADIOTAP_RETRY_COUNT);
 
 		rtap_buf[rtap_len] = rx_status->tx_status;
 		rtap_len += 1;
 		rtap_buf[rtap_len] = rx_status->tx_retry_cnt;
 		rtap_len += 1;
->>>>>>> 5ba69ee222c34acb7142427c5cdd916f9761bafa
 	}
 
 	rthdr->it_len = cpu_to_le16(rtap_len);
