@@ -3175,7 +3175,7 @@ u32 rtw_read_efuse_from_file(const char *path, u8 *buf, int map_size)
 			c = file_data[pos++];
 
 			/* bypass spece or eol or null before first hex digit */
-			if (temp_i == 0 && (is_eol(c) == _TRUE || is_space(c) == _TRUE || is_null(c) == _TRUE))
+			if (temp_i == 0 && (is_eol(c) == _TRUE || _is_space(c) == _TRUE || is_null(c) == _TRUE))
 				continue;
 
 			if (IsHexDigit(c) == _FALSE) {

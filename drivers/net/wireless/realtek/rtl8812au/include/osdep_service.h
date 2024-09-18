@@ -779,7 +779,7 @@ void dump_blacklist(void *sel, _queue *blist, const char *title);
 BOOLEAN is_null(char c);
 BOOLEAN is_all_null(char *c, int len);
 BOOLEAN is_eol(char c);
-BOOLEAN is_space(char c);
+BOOLEAN _is_space(char c);
 BOOLEAN IsHexDigit(char chTmp);
 BOOLEAN is_alpha(char chTmp);
 char alpha_to_upper(char c);

@@ -3072,7 +3072,7 @@ inline BOOLEAN is_eol(char c)
 *		FALSE otherwise.
 */
 
-inline BOOLEAN is_space(char c)
+inline BOOLEAN _is_space(char c)
 {
        if (c == ' ' || c == '\t')
                return _TRUE;
